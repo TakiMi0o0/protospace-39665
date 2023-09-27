@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:edit, :show]
+  before_action :set_prototype, only: [:edit, :show, :update]
   before_action :move_to_index, only: :edit
 
   def index
@@ -13,7 +13,7 @@ class PrototypesController < ApplicationController
   def create
     @prototype = Prototype.create(prototype_params)
     if @prototype.save
-      redirect_to '/'
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,9 +28,8 @@ class PrototypesController < ApplicationController
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    prototype.update(prototype_params)
-    if prototype.save
+    @prototype.update(prototype_params)
+    if @prototype.save
       redirect_to prototype_path
     else
       render :edit, status: :unprocessable_entity
