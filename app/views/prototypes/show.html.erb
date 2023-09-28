@@ -14,7 +14,9 @@
       <% end %>
       <%# // プロトタイプの投稿者とログインしているユーザーが同じであれば上記を表示する %>
       <div class="prototype__image">
-        <%= image_tag @prototype.image.variant(resize: '500x500'), class: :card__img if @prototype.image.attached? %>
+        <%= link_to prototype_path(prototype) do %>
+          <%= image_tag prototype.image.variant(resize: '500x500'), class: :card__img if prototype.image.attached? %>
+        <% end %>
       </div>
       <div class="prototype__body">
         <div class="prototype__detail">
